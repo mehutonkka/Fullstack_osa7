@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import PageNotFound from './PageNotFound'
 
 const BlogCard = styled.div`
   max-width: 700px;
@@ -65,7 +66,7 @@ const BlogDetails = ({blogs, likeHandler, user, deleteBlogHandler }) => {
   const blog = blogs.find(b => b.id === id)
 
   if (!blog) {
-    return null
+    return <PageNotFound />
   }
 
   let showDeleteButton = false

@@ -4,6 +4,8 @@ import BlogDetails from './components/BlogDetails'
 import Notification from './components/Notification'
 import BlogForm from './components/BlogForm'
 import Togglable from './components/Togglable'
+import ErrorBoundary from './components/ErrorBoundary'
+import PageNotFound from './components/PageNotFound'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -201,6 +203,7 @@ const App = () => {
 
 
 
+
   return (
     <div>
       <NavBar>
@@ -220,19 +223,22 @@ const App = () => {
       </NavBar>
 
       <Notification message={notification} />
-      <Routes>
-        <Route path="/login" element={loginForm()} />
-        <Route path="/" element={BlogList()} />
-        <Route path="/create" element={<CreateBlogView />} />
-        <Route path="/blogs/:id" element={
-          <BlogDetails
-            blogs={blogs}
-            likeHandler={likeHandler}
-            user={user}
-            deleteBlogHandler={deleteBlogHandler}
-          />
-        } />
-      </Routes>
+      <ErrorBoundary>
+        <Routes>
+          <Route path="/login" element={loginForm()} />
+          <Route path="/" element={BlogList()} />
+          <Route path="/create" element={<CreateBlogView />} />
+          <Route path="/blogs/:id" element={
+            <BlogDetails
+              blogs={blogs}
+              likeHandler={likeHandler}
+              user={user}
+              deleteBlogHandler={deleteBlogHandler}
+            />
+          } />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </ErrorBoundary>
     </div>
 
 
