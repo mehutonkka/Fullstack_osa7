@@ -20,13 +20,7 @@ import {
   Button,
 } from './components/FormStyles'
 
-import {
-  NavBar,
-  NavLink,
-  NavUser,
-  LogoutButton,
-} from './components/NavStyles'
-
+import { NavBar, NavLink, NavUser, LogoutButton } from './components/NavStyles'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -39,9 +33,7 @@ const App = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs ),
-    )  
+    blogService.getAll().then(blogs => setBlogs(blogs))
   }, [])
 
   useEffect(() => {
@@ -53,18 +45,16 @@ const App = () => {
     }
   }, [])
 
-  const loginHandler = async (event) => {
+  const loginHandler = async event => {
     event.preventDefault()
 
     try {
       const user = await loginService.login({
-        username, password,
+        username,
+        password,
       })
 
-      window.localStorage.setItem(
-        'loggedUser',
-        JSON.stringify(user),
-      )
+      window.localStorage.setItem('loggedUser', JSON.stringify(user))
 
       blogService.setToken(user.token)
       setUser(user)
@@ -74,7 +64,7 @@ const App = () => {
       notificationHandler('logged in successfully')
     } catch {
       notificationHandler('wrong username or password')
-    } 
+    }
   }
 
   const logoutHandler = () => {
@@ -110,17 +100,18 @@ const App = () => {
         <Button type="submit">login</Button>
       </Form>
     </FormContainer>
-      
   )
 
-  const createBlog = async (blogObject) => {
+  const createBlog = async blogObject => {
     try {
       const returnedBlog = await blogService.create(blogObject)
 
-      setBlogs(blogs.concat({
-        ...returnedBlog,
-        user: user,
-      }))
+      setBlogs(
+        blogs.concat({
+          ...returnedBlog,
+          user: user,
+        }),
+      )
 
       notificationHandler(`blog ${returnedBlog.title} created`)
       navigate('/')
@@ -129,7 +120,7 @@ const App = () => {
     }
   }
 
-  const likeHandler = async (blog) => {
+  const likeHandler = async blog => {
     if (!user) {
       return
     }
@@ -144,17 +135,21 @@ const App = () => {
 
     const returnedBlog = await blogService.update(blog.id, updatedBlog)
 
-    setBlogs(blogs.map(b => b.id !== blog.id ? b : {...returnedBlog, user: blog.user} ))
+    setBlogs(
+      blogs.map(b =>
+        b.id !== blog.id ? b : { ...returnedBlog, user: blog.user },
+      ),
+    )
   }
 
-  const notificationHandler = (message) => {
+  const notificationHandler = message => {
     setNotification(message)
     setTimeout(() => {
       setNotification(null)
     }, 5000)
   }
 
-  const deleteBlogHandler = async (blog) => {
+  const deleteBlogHandler = async blog => {
     const confirm = window.confirm(`Delete blog "${blog.title}"?`)
 
     if (!confirm) {
@@ -163,7 +158,7 @@ const App = () => {
 
     try {
       await blogService.remove(blog.id)
-      
+
       setBlogs(blogs.filter(b => b.id !== blog.id))
       notificationHandler(`blog ${blog.title} deleted`)
       navigate('/')
@@ -174,18 +169,17 @@ const App = () => {
 
   const BlogList = () => (
     <div>
-
       <h2>blogs</h2>
 
       {[...blogs]
         .sort((a, b) => b.likes - a.likes)
-        .map(blog =>
+        .map(blog => (
           <div key={blog.id}>
             <Link to={`/blogs/${blog.id}`}>
               {blog.title} {blog.author}
             </Link>
-          </div>,
-        )}
+          </div>
+        ))}
     </div>
   )
 
@@ -201,18 +195,21 @@ const App = () => {
     )
   }
 
-
-
-
   return (
     <div>
       <NavBar>
-        <NavLink style={{ padding: 5 }} to="/">blogs</NavLink>
+        <NavLink style={{ padding: 5 }} to="/">
+          blogs
+        </NavLink>
         {user && (
-          <NavLink style={{ padding: 5 }} to="/create">new blog</NavLink>
+          <NavLink style={{ padding: 5 }} to="/create">
+            new blog
+          </NavLink>
         )}
         {!user && (
-          <NavLink style={{ padding: 5 }} to="/login">login</NavLink>
+          <NavLink style={{ padding: 5 }} to="/login">
+            login
+          </NavLink>
         )}
         {user && (
           <span>
@@ -228,20 +225,21 @@ const App = () => {
           <Route path="/login" element={loginForm()} />
           <Route path="/" element={BlogList()} />
           <Route path="/create" element={<CreateBlogView />} />
-          <Route path="/blogs/:id" element={
-            <BlogDetails
-              blogs={blogs}
-              likeHandler={likeHandler}
-              user={user}
-              deleteBlogHandler={deleteBlogHandler}
-            />
-          } />
+          <Route
+            path="/blogs/:id"
+            element={
+              <BlogDetails
+                blogs={blogs}
+                likeHandler={likeHandler}
+                user={user}
+                deleteBlogHandler={deleteBlogHandler}
+              />
+            }
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </ErrorBoundary>
     </div>
-
-
   )
 }
 

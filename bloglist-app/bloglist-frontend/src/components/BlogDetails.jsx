@@ -60,8 +60,7 @@ const RemoveButton = styled(Button)`
   }
 `
 
-
-const BlogDetails = ({blogs, likeHandler, user, deleteBlogHandler }) => {
+const BlogDetails = ({ blogs, likeHandler, user, deleteBlogHandler }) => {
   const id = useParams().id
   const blog = blogs.find(b => b.id === id)
 
@@ -73,12 +72,13 @@ const BlogDetails = ({blogs, likeHandler, user, deleteBlogHandler }) => {
 
   if (user) {
     showDeleteButton = blog.user.id === user.id
-  } 
+  }
 
-  
   return (
     <BlogCard>
-      <BlogTitle>{blog.author}: {blog.title}</BlogTitle>
+      <BlogTitle>
+        {blog.author}: {blog.title}
+      </BlogTitle>
       <BlogMeta>
         <a href={blog.url} target="_blank" rel="noopener noreferrer">
           {blog.url}
@@ -86,16 +86,10 @@ const BlogDetails = ({blogs, likeHandler, user, deleteBlogHandler }) => {
       </BlogMeta>
       <BlogActions>
         {blog.likes} likes{' '}
-        {user && (
-          <Button onClick={() => likeHandler(blog)}>
-            like
-          </Button>
-        )}
+        {user && <Button onClick={() => likeHandler(blog)}>like</Button>}
       </BlogActions>
-      <br/>
-      <BlogMeta>
-        Added by {blog.user.name}
-      </BlogMeta>
+      <br />
+      <BlogMeta>Added by {blog.user.name}</BlogMeta>
       {showDeleteButton && (
         <RemoveButton onClick={() => deleteBlogHandler(blog)}>
           remove

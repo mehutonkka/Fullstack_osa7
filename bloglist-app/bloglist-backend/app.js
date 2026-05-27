@@ -28,7 +28,6 @@ mongoose
     console.log('error connecting to MongoDB:', error.message)
   })
 
-
 app.use(express.json())
 
 app.use(middleware.tokenExtractor)
@@ -41,7 +40,9 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../bloglist-frontend/dist')))
 
   app.get(/.*/, (request, response) => {
-    response.sendFile(path.join(__dirname, '../bloglist-frontend/dist/index.html'))
+    response.sendFile(
+      path.join(__dirname, '../bloglist-frontend/dist/index.html'),
+    )
   })
 }
 

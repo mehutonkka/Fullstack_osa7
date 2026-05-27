@@ -9,14 +9,12 @@ import {
   Button,
 } from './FormStyles'
 
-
 const BlogForm = ({ createBlog }) => {
-
   const [newTitle, setNewTitle] = useState('')
   const [newAuthor, setNewAuthor] = useState('')
   const [newUrl, setNewUrl] = useState('')
 
-  const createBlogHandler = async (event) => {
+  const createBlogHandler = async event => {
     event.preventDefault()
     createBlog({
       title: newTitle,
@@ -34,7 +32,7 @@ const BlogForm = ({ createBlog }) => {
         <FormField>
           <Label>title</Label>
           <Input
-            placeholder='title'
+            placeholder="title"
             type="text"
             value={newTitle}
             name="Title"
@@ -44,7 +42,7 @@ const BlogForm = ({ createBlog }) => {
         <FormField>
           <Label>author</Label>
           <Input
-            placeholder='author'
+            placeholder="author"
             type="text"
             value={newAuthor}
             name="Author"
@@ -54,7 +52,7 @@ const BlogForm = ({ createBlog }) => {
         <FormField>
           <Label>url</Label>
           <Input
-            placeholder='url'
+            placeholder="url"
             type="text"
             value={newUrl}
             name="Url"

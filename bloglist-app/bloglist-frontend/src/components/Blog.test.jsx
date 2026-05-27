@@ -1,5 +1,5 @@
-import {test, expect, vi} from 'vitest'
-import {render, screen} from '@testing-library/react'
+import { test, expect, vi } from 'vitest'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
 
@@ -48,13 +48,13 @@ test('renders url, user and likes when view button is clicked', async () => {
       username: 'root',
       name: 'root user',
     },
-  }  
+  }
   const user = {
     id: '123',
     username: 'root',
     name: 'root user',
-  }  
-  const testingUser = userEvent.setup()  
+  }
+  const testingUser = userEvent.setup()
   render(
     <Blog
       blog={blog}
@@ -63,9 +63,9 @@ test('renders url, user and likes when view button is clicked', async () => {
       user={user}
     />,
   )
-  
+
   const button = screen.getByText('view')
-  await testingUser.click(button)  
+  await testingUser.click(button)
   screen.getByText('http://test.com')
   screen.getByText('5 likes')
   screen.getByText('root user')
@@ -82,7 +82,7 @@ test('clicking like twice calls the handler twice', async () => {
       username: 'root',
       name: 'root user',
     },
-  }  
+  }
   const user = {
     id: '123',
     username: 'root',
@@ -103,6 +103,6 @@ test('clicking like twice calls the handler twice', async () => {
   const likeButton = screen.getByText('like')
   await testingUser.click(likeButton)
   await testingUser.click(likeButton)
-  
+
   expect(mockHandler).toHaveBeenCalledTimes(2)
 })

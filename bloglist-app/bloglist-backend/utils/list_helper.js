@@ -1,12 +1,12 @@
-const dummy = (blogs) => {
+const dummy = blogs => {
   return 1
 }
 
-const totalLikes = (blogs) => {
+const totalLikes = blogs => {
   return blogs.reduce((sum, blog) => sum + blog.likes, 0)
 }
 
-const favoriteBlog = (blogs) => {
+const favoriteBlog = blogs => {
   if (blogs.length === 0) {
     return null
   }
@@ -15,7 +15,7 @@ const favoriteBlog = (blogs) => {
   })
 }
 
-const mostBlogs = (blogs) => {
+const mostBlogs = blogs => {
   if (blogs.length === 0) {
     return null
   }
@@ -38,7 +38,7 @@ const mostBlogs = (blogs) => {
   return { author: mostBlogsAuthor, blogs: mostBlogsCount }
 }
 
-const mostLikes = (blogs) => {
+const mostLikes = blogs => {
   if (blogs.length === 0) {
     return null
   }
@@ -66,5 +66,5 @@ module.exports = {
   totalLikes,
   favoriteBlog,
   mostBlogs,
-  mostLikes
+  mostLikes,
 }

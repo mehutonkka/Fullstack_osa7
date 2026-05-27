@@ -19,7 +19,7 @@ export const NavLink = styled(Link)`
 
   &:hover {
     text-decoration: underline;
-    color : #94631d;
+    color: #94631d;
   }
 `
 
@@ -37,6 +37,6 @@ export const LogoutButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background: #94631d;;
+    background: #94631d;
   }
 `

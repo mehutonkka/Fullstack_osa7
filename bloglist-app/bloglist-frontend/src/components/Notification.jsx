@@ -15,11 +15,7 @@ const Notification = ({ message }) => {
     return null
   }
 
-  return (
-    <NotificationBox>
-      {message}
-    </NotificationBox>
-  )
+  return <NotificationBox>{message}</NotificationBox>
 }
 
 export default Notification
