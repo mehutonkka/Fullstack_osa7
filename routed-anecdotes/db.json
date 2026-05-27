@@ -19,28 +19,14 @@
       "author": "testi",
       "info": "testi",
       "votes": 0,
-      "id": "jGeRH5MYhRY"
+      "id": "rgdynAwocZU"
     },
     {
       "content": "testi2",
       "author": "testi2",
       "info": "testi2",
       "votes": 0,
-      "id": "K7bGDn6G3Cg"
-    },
-    {
-      "content": "testi3",
-      "author": "testi3",
-      "info": "testi3",
-      "votes": 0,
-      "id": "_2YlEYCoe4g"
-    },
-    {
-      "content": "testi5",
-      "author": "testi5",
-      "info": "testi5",
-      "votes": 0,
-      "id": "_QSTOBYgBLo"
+      "id": "PLqHshZ-EDM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
